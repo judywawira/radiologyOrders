@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module configVersion="1.2">
+
+	<!-- Module Properties -->
+	<id>radiologyOrders</id>
+	<name>Radiology Orders Module</name>
+	<version>1.0-SNAPSHOT</version>
+	<package>org.openmrs.module.radiologyOrders</package>
+	<author>Judy Gichoya</author>
+	<description>
+		Generates order messages from OpenMRS and sends them to DCM4CHEE
+	</description>
+	<updateURL>https://modules.openmrs.org/modules/download/radiologyOrders/update.rdf</updateURL>
+	<require_version>1.8.2</require_version>
+	<!-- / Module Properties -->
+
+	
+	<!-- Module Activator -->
+	<activator>org.openmrs.module.radiologyOrders.RadiologyOrdersActivator</activator>
+	
+	
+	<!-- Adds link to admin page -->
+	<extension>
+		<point>org.openmrs.admin.list</point>
+		<class>org.openmrs.module.radiologyOrders.extension.html.AdminList</class>
+	</extension>
+	
+	<!--  add extension to patient dashboard -->
+	<extension>
+      <point>org.openmrs.patientDashboardTab</point>
+      <class>org.openmrs.module.radiologyOrders.extension.html.RadiologyOrdersDashboardTab</class>
+	</extension>
+	
+	<!-- Maps hibernate file's, if present -->
+	<mappingFiles>
+				
+		radiologyOrders_object.hbm.xml
+				
+	</mappingFiles>
+
+	<!-- Internationalization -->
+	<!-- All message codes should start with radiologyOrders. -->
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+	<messages>
+		<lang>fr</lang>
+		<file>messages_fr.properties</file>
+	</messages>
+	<messages>
+		<lang>es</lang>
+		<file>messages_es.properties</file>
+	</messages>
+	<!-- /Internationalization -->
+	
+	<!-- add DWR functionality -->
+	<dwr>
+        <allow>
+            <create creator="new" javascript="DWRRadiologyOrdersService">
+                <param name="class" value="@MODULE_PACKAGE@.web.dwr.DWRRadiologyOrdersService"/>
+                <include method="getAllLocations"/>
+            </create>
+        </allow>
+ 
+        <signatures>
+            <![CDATA[
+            import @MODULE_PACKAGE@.web.dwr.DWRRadiologyOrdersService;
+            DWRRadiologyOrdersService.getAllLocations();
+            ]]>
+        </signatures>
+    </dwr>
+    
+    <!-- Privilege adding -->
+    
+    <privilege>
+  		<name>Manage Radiology Orders</name>
+  		<description>Ability to Manage HL7 orders</description>
+	</privilege>
+
+	<privilege>
+  		<name>Manage Radiology Tests</name>
+  		<description>Add or edit available tests</description>
+	</privilege>
+	
+	<privilege>
+  		<name>Manage Radiology Message Logs</name>
+  		<description>View Message status</description>
+	</privilege>
+
+</module>
+

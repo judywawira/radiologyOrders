@@ -1,0 +1,5 @@
+#surefire
+#Tue Sep 11 17:42:16 EAT 2012
+user.dir=/Users/judygichoya/Projects/OpenMRS/radiologyOrders/omod
+localRepository=/Users/judygichoya/.m2/repository
+basedir=/Users/judygichoya/Projects/OpenMRS/radiologyOrders/omod

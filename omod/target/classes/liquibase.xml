@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+    <!--
+        See http://www.liquibase.org/manual/home#available_database_refactorings
+        for a list of supported elements and attributes
+    -->
+    
+    <changeSet id="radiologyOrders-2012-11-09-15:25" author="jgichoya">
+		<preConditions onFail="HALT">
+			<tableExists tableName="order_type"/>
+		</preConditions>
+		<comment>Add a column to the order_type table to capture the conceptid</comment>
+		<addColumn tableName="order_type">
+			<column name="concept_id" type="int(11)">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+    
+</databaseChangeLog>
